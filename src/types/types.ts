@@ -8,3 +8,9 @@ export interface UserData {
     phone: string;
     age: number;
 }
+
+export default interface CustomerTableProps {
+  customers: UserData[];
+  onEdit?: (customer: UserData) => void;
+}
+

@@ -12,13 +12,14 @@ import {
   Card,
   CardContent,
   Box,
-  IconButton
+  IconButton,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+
 import type { UserData } from "../types/types";
 import contactsData from "../data/contacts.json";
+import CustomerTable from "./CustomerTable";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const [customerData, setCustomerData] = useState<UserData[]>(contactsData);
 
   return (
@@ -53,36 +54,9 @@ export default function Dashboard() {
       </Grid>
 
       {/* Customer Table */}
-      <Paper sx={{ p: 2 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Street</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone</TableCell>
-              <TableCell>Age</TableCell>
-              <TableCell>Edit</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {customerData.map((c, index) => (
-              <TableRow key={index} sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}>
-                <TableCell>{c.name}</TableCell>
-                <TableCell>{c.street}</TableCell>
-                <TableCell>{c.email}</TableCell>
-                <TableCell>{c.phone}</TableCell>
-                <TableCell>{c.age}</TableCell>
-                <TableCell>
-                  {/* <IconButton color="primary">
-                    <EditIcon />
-                  </IconButton> */}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
+      <CustomerTable customers={customerData} />
     </Box>
   );
-}
+};
+
+export default Dashboard;
