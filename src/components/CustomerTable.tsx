@@ -41,7 +41,7 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
 
   // Delete customer
   const handleDelete = (id: UserData["id"]) => {
-    setCustomers(prev => prev.filter(c => c.id !== id));
+    setCustomers((prev) => prev.filter((c) => c.id !== id));
   };
 
   // Close modal
@@ -51,10 +51,12 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
   const handleSave = (updated: UserData) => {
     if (updated.id) {
       // Edit existing
-      setCustomers(prev => prev.map(c => (c.id === updated.id ? updated : c)));
+      setCustomers((prev) =>
+        prev.map((c) => (c.id === updated.id ? updated : c))
+      );
     } else {
       // Add new
-      setCustomers(prev => [...prev, { ...updated, id: Date.now() }]);
+      setCustomers((prev) => [...prev, { ...updated, id: Date.now() }]);
     }
     setOpen(false);
   };
@@ -80,15 +82,21 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers.map(c => (
-              <TableRow key={c.id} sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}>
+            {customers.map((c) => (
+              <TableRow
+                key={c.id}
+                sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}
+              >
                 <TableCell>{c.name}</TableCell>
                 <TableCell>{c.street}</TableCell>
                 <TableCell>{c.email}</TableCell>
                 <TableCell>{c.phone}</TableCell>
                 <TableCell>{c.age}</TableCell>
                 <TableCell>
-                  <IconButton color="primary" onClick={() => handleEditClick(c)}>
+                  <IconButton
+                    color="primary"
+                    onClick={() => handleEditClick(c)}
+                  >
                     <EditIcon />
                   </IconButton>
                   <IconButton color="error" onClick={() => handleDelete(c.id)}>
