@@ -1,3 +1,4 @@
+// src/components/CustomerTable.tsx
 import { useState } from "react";
 import {
   Paper,
@@ -14,6 +15,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { CustomerTableProps, UserData } from "../types/types";
 import EditDialog from "./EditDialog";
+
+// Import TS style objects
+import {
+  addButtonBox,
+  tableRowHover,
+  modalBox,
+} from "../styles/customerTableStyles";
 
 const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
   const [customers, setCustomers] = useState<UserData[]>(initialCustomers);
@@ -63,12 +71,14 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+      {/* Add Button */}
+      <Box sx={addButtonBox}>
         <Button variant="contained" color="primary" onClick={handleAddClick}>
           Add Customer
         </Button>
       </Box>
 
+      {/* Customer Table */}
       <Paper sx={{ p: 2 }}>
         <Table>
           <TableHead>
@@ -83,10 +93,7 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
           </TableHead>
           <TableBody>
             {customers.map((c) => (
-              <TableRow
-                key={c.id}
-                sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}
-              >
+              <TableRow key={c.id} sx={tableRowHover}>
                 <TableCell>{c.name}</TableCell>
                 <TableCell>{c.street}</TableCell>
                 <TableCell>{c.email}</TableCell>
@@ -109,13 +116,14 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
         </Table>
       </Paper>
 
-      {/* Modal */}
+      {/* Edit/Add Modal */}
       {editingCustomer && (
         <EditDialog
           open={open}
           data={editingCustomer}
           onClose={handleClose}
           onSave={handleSave}
+          sxBox={modalBox} // Pass modal box styling if needed in EditDialog
         />
       )}
     </>

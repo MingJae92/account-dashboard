@@ -1,37 +1,32 @@
 // src/components/Dashboard.tsx
 import { useState } from "react";
-import {
-  Grid,
-  Paper,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  Typography,
-  Card,
-  CardContent,
-  Box,
-  IconButton,
-} from "@mui/material";
+import { Grid, Card, CardContent, Typography, Box } from "@mui/material";
 
 import type { UserData } from "../types/types";
 import contactsData from "../data/contacts.json";
 import CustomerTable from "./CustomerTable";
 
+// Import TS style objects
+import {
+  container,
+  cardGrid,
+  totalCustomersCard,
+  averageAgeCard,
+} from "../styles/dashboardStyles";
+
 const Dashboard = () => {
   const [customerData, setCustomerData] = useState<UserData[]>(contactsData);
 
   return (
-    <Box sx={{ padding: 4 }}>
+    <Box sx={container}>
       <Typography variant="h4" gutterBottom>
         Customer Management Dashboard
       </Typography>
 
       {/* KPI Cards */}
-      <Grid container spacing={2} mb={4}>
+      <Grid container spacing={2} sx={cardGrid}>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ backgroundColor: "#1976d2", color: "white" }}>
+          <Card sx={totalCustomersCard}>
             <CardContent>
               <Typography variant="subtitle1">Total Customers</Typography>
               <Typography variant="h5">{customerData.length}</Typography>
@@ -39,7 +34,7 @@ const Dashboard = () => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ backgroundColor: "#388e3c", color: "white" }}>
+          <Card sx={averageAgeCard}>
             <CardContent>
               <Typography variant="subtitle1">Average Age</Typography>
               <Typography variant="h5">
