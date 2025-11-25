@@ -1,4 +1,5 @@
 import type { Key } from "react";
+import type { SxProps, Theme } from "@mui/material";
 
 export interface UserData {
   id: Key | null | undefined;
@@ -19,4 +20,5 @@ export interface EditDialogProps {
   data: UserData;
   onClose: () => void;
   onSave: (updated: UserData) => void;
+  sxBox?: SxProps<Theme>; // optional custom styling for Box
 }

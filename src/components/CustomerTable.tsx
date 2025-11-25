@@ -1,4 +1,3 @@
-// src/components/CustomerTable.tsx
 import { useState } from "react";
 import {
   Paper,
@@ -10,31 +9,28 @@ import {
   IconButton,
   Button,
   Box,
+ 
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { CustomerTableProps, UserData } from "../types/types";
 import EditDialog from "./EditDialog";
 
-// Import TS style objects
-import {
-  addButtonBox,
-  tableRowHover,
-  modalBox,
-} from "../styles/customerTableStyles";
+// Optional custom styles
+import { addButtonBox, tableRowHover, modalBox } from "../styles/customerTableStyles";
 
 const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
   const [customers, setCustomers] = useState<UserData[]>(initialCustomers);
   const [editingCustomer, setEditingCustomer] = useState<UserData | null>(null);
   const [open, setOpen] = useState(false);
 
-  // Open modal for editing
+  // Edit modal
   const handleEditClick = (customer: UserData) => {
     setEditingCustomer(customer);
     setOpen(true);
   };
 
-  // Open modal for adding new record
+  // Add modal
   const handleAddClick = () => {
     setEditingCustomer({
       id: null,
@@ -47,24 +43,18 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
     setOpen(true);
   };
 
-  // Delete customer
+  // Delete record
   const handleDelete = (id: UserData["id"]) => {
-    setCustomers((prev) => prev.filter((c) => c.id !== id));
+    setCustomers(prev => prev.filter(c => c.id !== id));
   };
 
-  // Close modal
   const handleClose = () => setOpen(false);
 
-  // Save modal changes
   const handleSave = (updated: UserData) => {
     if (updated.id) {
-      // Edit existing
-      setCustomers((prev) =>
-        prev.map((c) => (c.id === updated.id ? updated : c))
-      );
+      setCustomers(prev => prev.map(c => (c.id === updated.id ? updated : c)));
     } else {
-      // Add new
-      setCustomers((prev) => [...prev, { ...updated, id: Date.now() }]);
+      setCustomers(prev => [...prev, { ...updated, id: Date.now() }]);
     }
     setOpen(false);
   };
@@ -92,7 +82,7 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers.map((c) => (
+            {customers.map(c => (
               <TableRow key={c.id} sx={tableRowHover}>
                 <TableCell>{c.name}</TableCell>
                 <TableCell>{c.street}</TableCell>
@@ -100,10 +90,7 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
                 <TableCell>{c.phone}</TableCell>
                 <TableCell>{c.age}</TableCell>
                 <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEditClick(c)}
-                  >
+                  <IconButton color="primary" onClick={() => handleEditClick(c)}>
                     <EditIcon />
                   </IconButton>
                   <IconButton color="error" onClick={() => handleDelete(c.id)}>
@@ -123,7 +110,7 @@ const CustomerTable = ({ customers: initialCustomers }: CustomerTableProps) => {
           data={editingCustomer}
           onClose={handleClose}
           onSave={handleSave}
-          sxBox={modalBox} // Pass modal box styling if needed in EditDialog
+          sxBox={modalBox} // optional custom modal styles
         />
       )}
     </>
