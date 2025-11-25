@@ -23,7 +23,6 @@ const Dashboard = () => {
         Customer Management Dashboard
       </Typography>
 
-      {/* KPI Cards */}
       <Grid container spacing={2} sx={cardGrid}>
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={totalCustomersCard}>
@@ -48,7 +47,6 @@ const Dashboard = () => {
         </Grid>
       </Grid>
 
-      {/* Customer Table */}
       <CustomerTable customers={customerData} />
     </Box>
   );

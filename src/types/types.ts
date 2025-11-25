@@ -20,5 +20,5 @@ export interface EditDialogProps {
   data: UserData;
   onClose: () => void;
   onSave: (updated: UserData) => void;
-  sxBox?: SxProps<Theme>; // optional custom styling for Box
+  sxBox?: SxProps<Theme>;
 }
