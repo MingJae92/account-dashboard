@@ -12,14 +12,14 @@ import {
   Card,
   CardContent,
   Box,
-  IconButton,
+  IconButton
 } from "@mui/material";
 
 import type { UserData } from "../types/types";
 import contactsData from "../data/contacts.json";
 import CustomerTable from "./CustomerTable";
 
-const Dashboard = () => {
+const Dashboard=()=> {
   const [customerData, setCustomerData] = useState<UserData[]>(contactsData);
 
   return (
@@ -54,9 +54,9 @@ const Dashboard = () => {
       </Grid>
 
       {/* Customer Table */}
-      <CustomerTable customers={customerData} />
+ <CustomerTable customers={customerData} />
     </Box>
   );
-};
+}
 
-export default Dashboard;
+export default Dashboard
